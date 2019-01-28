@@ -60,6 +60,15 @@ class Movie {
         return $this;
     }
 
+
+    public function save() {
+        $this->dbCreate("Movie", [
+            "title"         => $this->title(),
+            "release_date"  => $this->releaseDate(),
+            "plot"          => $this->plot()
+        ]);
+    }
+
 }
 
 $movie = new Movie();

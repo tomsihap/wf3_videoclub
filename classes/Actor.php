@@ -37,12 +37,11 @@ class Actor {
     }
 
     public function save() {
-        $data = [
-            'firstname' => $this->firstname,
-            'lastname'  => $this->lastname
-        ];
 
-        return $this->dbCreate($data);
+        $this->dbCreate("Actor", [
+            "firstname" => $this->firstname(),
+            "lastname" => $this->lastname()
+        ]);
 
     }
 }

@@ -2,7 +2,7 @@
 
 // Category.php
 
-class Category {
+class Category extends Db {
 
     /**
      * Attributs
@@ -10,6 +10,7 @@ class Category {
     protected $id;
     protected $title;
     protected $description;
+    protected $bdd;
 
     /**
      * Méthodes magiques
@@ -53,28 +54,15 @@ class Category {
 
     public function save() {
 
-        $host       = 'localhost'; // Hôte de la base de données
-        $dbname     = 'videoclub'; // Nom de la bdd
-        $port       = '3308'; // Ou 3308 selon la configuration
-        $login      = 'root'; // Par défaut dans WAMP
-        $password   = ''; // Par défaut dans WAMP (pour MAMP : 'root')
-
-        try {
-            // Essaie de faire ce script...
-            $bdd = new PDO('mysql:host='.$host.';dbname='.$dbname.';charset=utf8;port='.$port, $login, $password);
-        }
-        catch (Exception $e) {
-            // Sinon, capture l'erreur et affiche la
-            die('Erreur : ' . $e->getMessage());
-        }
-
-        $res = $bdd->prepare('INSERT INTO category(title, description) VALUES(:title, :description)');
-
-        $res->execute([
-            "title" => $this->title(),
-            "description" => $this->description()
+        $this->dbCreate("Category", [
+            "title"         => $this->title(),
+            "description"   => $this->description()
         ]);
 
+//        $this->id = $bdd->lastInsertId();
+    }
 
+    public function delete() {
+        //
     }
 }
