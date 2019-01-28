@@ -2,7 +2,7 @@
 
 // Actor.php
 
-class Actor extends Db {
+class Actor {
 
     protected $id;
     protected $firstname;
