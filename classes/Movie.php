@@ -2,7 +2,7 @@
 
 // Movie.php
 
-class Movie {
+class Movie extends Db{
     
     protected $id;
     protected $title;
@@ -69,8 +69,21 @@ class Movie {
         ]);
     }
 
+    public function deleteActor($idActor) {
+        $this->dbDelete('Movie', [
+            'id_movie' => $this->id(),
+            'id_actor' => $idActor
+        ]);
+    }
+
 }
 
 $movie = new Movie();
+/* 
 
-$movie->title();
+$movie->categoryId();
+
+$movie->category()->description();
+
+$movie->actors();
+ */

@@ -36,6 +36,39 @@ class Db {
 
         $response->execute($data);
 
+        return $this->bdd->lastInsertId();
+    }
+
+    public function dbDelete(string $table, array $data) {
+
+        $this->getDb();
+
+        // Construction de la requête au format : INSERT INTO $table($data.keys) VALUES(:$data.keys) 
+        $req  = "DELETE FROM " . $table . " WHERE " . array_keys($data)[0] . " = :" . array_keys($data)[0];
+
+        $response = $this->bdd->prepare($req);
+
+        $response->execute($data);
+
+        return;
+    }
+
+    public function dbFind(string $table, array $data = null) {
+
+        $this->getDb();
+
+        $req = "SELECT * FROM " . $table;
+
+        $response = $this->bdd->query($req);
+
+        $data = [];
+
+        while ($donnees = $response->fetch()) {
+            $data[] = $donnees;
+        }
+
+        return $data;
+
     }
 
 

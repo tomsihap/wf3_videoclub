@@ -13,6 +13,12 @@ class Category extends Db {
     protected $bdd;
 
     /**
+     * Constantes
+     */
+
+    const TABLE_NAME = "Category";
+
+    /**
      * Méthodes magiques
      */
     public function __construct($title, $description) {
@@ -39,6 +45,7 @@ class Category extends Db {
      * Setters
      */
     public function setTitle($title) {
+
         $this->title = $title;
         return $this;
     }
@@ -54,15 +61,30 @@ class Category extends Db {
 
     public function save() {
 
-        $this->dbCreate("Category", [
+        $idApresCreation = $this->dbCreate(TABLE_NAME, [
             "title"         => $this->title(),
             "description"   => $this->description()
         ]);
 
-//        $this->id = $bdd->lastInsertId();
+        $this->id = $idApresCreation;
+
+        return $this;
     }
 
     public function delete() {
-        //
+        
+        $this->dbDelete(TABLE_NAME, [
+            'id' => $this->id(),
+        ]);
+    }
+
+    public function getList() {
+
+        /* $this->dbFind("Category", [
+            ["description", "=", "humour"],
+            ["title", "like", "comédie"]
+        ]); */
+
+        return $this->dbFind(TABLE_NAME);
     }
 }
