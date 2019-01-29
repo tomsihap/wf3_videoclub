@@ -24,6 +24,8 @@ class Category extends Db {
     public function __construct($title, $description) {
         $this->setTitle($title);
         $this->setDescription($description);
+
+        $this->id = 1;
     }
 
     /**
@@ -61,30 +63,43 @@ class Category extends Db {
 
     public function save() {
 
-        $idApresCreation = $this->dbCreate(TABLE_NAME, [
+        $data = [
             "title"         => $this->title(),
             "description"   => $this->description()
-        ]);
+        ];
 
-        $this->id = $idApresCreation;
+        if ($this->id > 0) {
+            $data["id"] = $this->id();
+            $this->dbUpdate(self::TABLE_NAME, $data);
+            return $this;
+        }
 
+        $idApresCreationOuUpdate = $this->dbCreate(self::TABLE_NAME, $data);
+        $this->id = $idApresCreationOuUpdate;
         return $this;
     }
 
     public function delete() {
         
-        $this->dbDelete(TABLE_NAME, [
+        $this->dbDelete(self::TABLE_NAME, [
             'id' => $this->id(),
         ]);
+
+        return;
     }
 
-    public function getList() {
-
-        /* $this->dbFind("Category", [
-            ["description", "=", "humour"],
-            ["title", "like", "comédie"]
-        ]); */
-
-        return $this->dbFind(TABLE_NAME);
+    public static function findAll() {
+        return Db::dbFind(self::TABLE_NAME);
     }
+
+    public static function find(array $request) {
+        return Db::dbFind(self::TABLE_NAME, $request);
+    }
+
+    public static function findOne(int $id) {
+        return Db::dbFind(self::TABLE_NAME, [
+            ['id', '=', $id]
+        ]);
+    }
+    
 }

@@ -8,12 +8,20 @@ $cat = new Category("Humour", "Des films drôles");
 
 $cat->save();
 
-var_dump($cat);
+// var_dump($cat);
 
-$cat->delete();
+// $cat->delete();
 
-$cat->getList();
+// $cat->getList();
 
-$list = $cat->getList();
+//$list = Category::findAll();
+
+// $categorie = Category::find([
+//     ['name', 'like', 'humour'],
+//     ['description', '=', 'rire'],
+//     ['orderBy', 'id', 'desc']
+// ]);
+
+$categorie = Category::findOne(4);
 
 var_dump($list);

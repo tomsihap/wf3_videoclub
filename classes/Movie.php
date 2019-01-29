@@ -2,7 +2,7 @@
 
 // Movie.php
 
-class Movie extends Db{
+class Movie extends Db {
     
     protected $id;
     protected $title;
