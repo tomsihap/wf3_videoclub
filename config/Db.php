@@ -104,7 +104,7 @@ class Db {
 
     protected static function dbUpdate(string $table, array $data) {
 
-        //$bdd = self::getDb();
+        $bdd = self::getDb();
 
         $req  = "UPDATE " . $table . " SET ";
 
@@ -112,7 +112,7 @@ class Db {
 
         foreach($data as $key => $value) {
             if ($key == 'id') {
-                $whereIdString = " WHERE id = " . $value;
+                $whereIdString = " WHERE id = :id";
             }
 
             else {
@@ -124,9 +124,6 @@ class Db {
 
         $req = substr($req, 0, -2);
         $req .= $whereIdString;
-
-        var_dump($req);
-        die();
 
         $response = $bdd->prepare($req);
 

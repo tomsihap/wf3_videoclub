@@ -8,6 +8,7 @@ if (isset($_GET) && isset($_GET['controller']) && isset($_GET['action'])) {
     switch($_GET['controller']) :
 
         case "category":
+
         break;
 
 
@@ -20,7 +21,7 @@ if (isset($_GET) && isset($_GET['controller']) && isset($_GET['action'])) {
     switch($_GET['action']) :
 
         case "list":
-            $action = "list";
+            $action = "findAll";
             break;
 
         case "show":

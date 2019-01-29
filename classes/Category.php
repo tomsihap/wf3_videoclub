@@ -48,7 +48,6 @@ class Category extends Db {
      * Setters
      */
     public function setTitle($title) {
-
         $this->title = $title;
         return $this;
     }
@@ -64,6 +63,7 @@ class Category extends Db {
 
     public function save() {
 
+
         $data = [
             "title"         => $this->title(),
             "description"   => $this->description()
@@ -71,6 +71,7 @@ class Category extends Db {
 
         if ($this->id > 0) {
             $data["id"] = $this->id();
+
             $this->dbUpdate(self::TABLE_NAME, $data);
             return $this;
         }

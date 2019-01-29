@@ -8,10 +8,10 @@ class Movie extends Db {
     protected $title;
     protected $releaseDate;
     protected $plot;
-    protected $id_category;
+    protected $idCategory;
+    protected $category;
 
     const TABLE_NAME = "Movie";
-
 
     public function __construct(string $title, DateTime $date, string $plot, Category $category) {
 
@@ -44,8 +44,12 @@ class Movie extends Db {
     
     public function category() {
 
-        $category = Category::findOne($this->idCategory);
-        return $category;
+        if ($this->category instanceof Category) {
+            return $this->category;
+        }
+
+        $this->category = Category::findOne($this->idCategory);
+        return $this->category;
     }
 
     public function setTitle($title) {
@@ -54,6 +58,7 @@ class Movie extends Db {
     }
 
     public function setReleaseDate(DateTime $date) {
+
         $this->releaseDate = $date->format('Y-m-d H:i:s');
         return $this;
     }
@@ -64,8 +69,11 @@ class Movie extends Db {
     }
 
     public function setCategory(Category $category) {
+
         $this->idCategory = $category->id();
+
         return $this;
+
     }
 
     public function save() {
@@ -85,6 +93,17 @@ class Movie extends Db {
         $this->id = $this->dbCreate(self::TABLE_NAME, $data);
 
         return $this;
+    }
+
+    public function delete() {
+
+        $data = [
+            'id' => $this->id(),
+        ];
+        
+        $this->dbDelete(self::TABLE_NAME, $data);
+
+        return;
     }
 
 

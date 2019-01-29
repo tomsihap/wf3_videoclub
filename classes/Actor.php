@@ -55,4 +55,15 @@ class Actor extends Db {
         return $this;
 
     }
+
+    public function delete() {
+
+        $data = [
+            'id' => $this->id(),
+        ];
+        
+        $this->dbDelete(self::TABLE_NAME, $data);
+
+        return;
+    }
 }
