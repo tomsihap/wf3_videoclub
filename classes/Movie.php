@@ -31,7 +31,11 @@ class Movie extends Db {
     }
 
     public function releaseDate() {
-        return $this->releaseDate;
+
+        $date = new DateTime($this->releaseDate);
+        $dateFr = $date->format('d/m/Y H:i');
+
+        return $dateFr;
     }
 
     public function plot() {

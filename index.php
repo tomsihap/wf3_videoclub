@@ -73,3 +73,12 @@ $cats = Category::find([
 ]);
 
 var_dump($cats);
+
+
+$movie->title(); // Un film a accès à son titre
+
+// impossible : Movie::title(); (l'usine donne des titres aux films, mais elle-même n'a pas de titre)
+
+Movie::findAll(); // L'usine a accès à tous les films créés
+
+// impossible: $movie->findAll(); (un film n'a pas accès aux autres films créés)
