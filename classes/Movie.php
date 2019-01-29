@@ -10,7 +10,15 @@ class Movie extends Db {
     protected $plot;
     protected $id_category;
 
-    public function __construct() {
+    const TABLE_NAME = "Movie";
+
+
+    public function __construct(string $title, DateTime $date, string $plot, Category $category) {
+
+        $this->setTitle($title);
+        $this->setReleaseDate($date);
+        $this->setPlot($plot);
+        $this->setCategory($category);
 
     }
 
@@ -35,7 +43,9 @@ class Movie extends Db {
     }
     
     public function category() {
-        // return $this->category->name;
+
+        $category = Category::findOne($this->idCategory);
+        return $category;
     }
 
     public function setTitle($title) {
@@ -43,8 +53,8 @@ class Movie extends Db {
         return $this;
     }
 
-    public function setReleaseDate($releaseDate) {
-        $this->releaseDate = $releaseDate;
+    public function setReleaseDate(DateTime $date) {
+        $this->releaseDate = $date->format('Y-m-d H:i:s');
         return $this;
     }
 
@@ -54,11 +64,28 @@ class Movie extends Db {
     }
 
     public function setCategory(Category $category) {
-        // $this->category_id = $category->id();
+        $this->idCategory = $category->id();
+        return $this;
+    }
+
+    public function save() {
+        $data = [
+            "title"         => $this->title(),
+            "release_date"   => $this->releaseDate(),
+            "plot"          => $this->plot(),
+            "id_category"   => $this->idCategory()
+        ];
+
+        if ($this->id > 0) {
+            $data["id"] = $this->id();
+            $this->dbUpdate(self::TABLE_NAME, $data);
+            return $this;
+        }
+
+        $this->id = $this->dbCreate(self::TABLE_NAME, $data);
+
         return $this;
     }
 
 
 }
-
-$movie = new Movie();

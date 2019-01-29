@@ -4,13 +4,29 @@ foreach( glob('config/*.php') as $config ) { require_once $config; }
 foreach( glob('classes/*.php') as $class ) { require_once $class; }
 
 
-$cat = new Category("Humour", "Des films drôles");
-// $cat->setTitle('Nouveau titre 2');
-// $cat->save();
-// $cat->delete();
+/** Tests des Save */
 
-$categorie = Category::findOne(25);
-var_dump($categorie);
+$cat = new Category("Humour", "Des films drôles");
+$cat->setTitle('Nouveau titre 2');
+$cat->save();
+
+$actor = new Actor('Johnny', 'Depp');
+$actor->save();
+
+$releaseDate = new DateTime('now');
+
+$movie = new Movie("Le livre de la jungle", $releaseDate, "Un film sur la jungle et les livres", $cat);
+$movie->save();
+
+var_dump(  $movie->category()->title()   );
+
+
+
+
+//$cat->delete();
+
+//$categorie = Category::findOne(25);
+//var_dump($categorie);
 
 
 // var_dump($cat);
@@ -21,8 +37,9 @@ var_dump($categorie);
 
 //$list = Category::findAll();
 
-// $categorie = Category::find([
-//     ['name', 'like', 'humour'],
-//     ['description', '=', 'rire'],
-//     ['orderBy', 'id', 'desc']
-// ]);
+$cats = Category::find([
+    ['title', 'like', 'humour'],
+    ['description', 'like', 'rire']
+]);
+
+var_dump($cats);

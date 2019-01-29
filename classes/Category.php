@@ -100,6 +100,7 @@ class Category extends Db {
     }
 
     public static function findOne(int $id) {
+
         $element = Db::dbFind(self::TABLE_NAME, [
             ['id', '=', $id]
         ]);
@@ -108,5 +109,5 @@ class Category extends Db {
 
         return $cat;
     }
-    
+
 }

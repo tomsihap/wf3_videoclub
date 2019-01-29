@@ -2,7 +2,7 @@
 
 // Actor.php
 
-class Actor {
+class Actor extends Db {
 
     protected $id;
     protected $firstname;
@@ -10,8 +10,9 @@ class Actor {
 
     const TABLE_NAME = "Actor";
 
-    public function __construct() {
-
+    public function __construct(string $firstname, string $lastname) {
+        $this->setFirstname($firstname);
+        $this->setLastname($lastname);
     }
 
     public function id() {
@@ -26,22 +27,32 @@ class Actor {
         return $this->lastname;
     }
 
-    public function setfirstname($firstname) {
+    public function setFirstname($firstname) {
         $this->firstname = $firstname;
         return $this;
     }
 
-    public function setlastname($lastname) {
+    public function setLastname($lastname) {
         $this->lastname = $lastname;
         return $this;
     }
 
     public function save() {
 
-        $this->dbCreate("Actor", [
+        $data = [
             "firstname" => $this->firstname(),
             "lastname" => $this->lastname()
-        ]);
+        ];
+
+        if ($this->id > 0) {
+            $data["id"] = $this->id();
+            $this->dbUpdate(self::TABLE_NAME, $data);
+            return $this;
+        }
+
+        $this->id = $this->dbCreate(self::TABLE_NAME, $data);
+
+        return $this;
 
     }
 }
