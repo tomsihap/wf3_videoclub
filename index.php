@@ -5,8 +5,13 @@ foreach( glob('classes/*.php') as $class ) { require_once $class; }
 
 
 $cat = new Category("Humour", "Des films drôles");
+// $cat->setTitle('Nouveau titre 2');
+// $cat->save();
+// $cat->delete();
 
-$cat->save();
+$categorie = Category::findOne(25);
+var_dump($categorie);
+
 
 // var_dump($cat);
 
@@ -21,7 +26,3 @@ $cat->save();
 //     ['description', '=', 'rire'],
 //     ['orderBy', 'id', 'desc']
 // ]);
-
-$categorie = Category::findOne(4);
-
-var_dump($list);

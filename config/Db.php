@@ -55,7 +55,7 @@ class Db {
 
     protected static function dbFind(string $table, array $request = null) {
 
-        //$bdd = self::getDb();
+        $bdd = self::getDb();
 
         $req = "SELECT * FROM " . $table;
 
@@ -67,8 +67,6 @@ class Db {
 
             foreach($request as $r) {
 
-                var_dump($r);
-
                 switch($r[0]):
 
                     case "orderBy":
@@ -76,7 +74,7 @@ class Db {
                         break;
                     
                     default:
-                        $req .= "`". htmlspecialchars($r[0]) . "` " . htmlspecialchars($r[1]) . " `" . htmlspecialchars($r[2]) . "`";
+                        $req .= "`". htmlspecialchars($r[0]) . "` " . htmlspecialchars($r[1]) . " '" . htmlspecialchars($r[2]) . "'";
                         $req .= " AND ";
 
                 endswitch;
@@ -88,9 +86,6 @@ class Db {
 
         }
 
-        var_dump($req);
-        die();
-
         $response = $bdd->query($req);
 
         $data = [];
@@ -99,10 +94,13 @@ class Db {
             $data[] = $donnees;
         }
 
+        if (count($data) == 1) {
+            $data = $data[0];
+        }
+
         return $data;
 
     }
-
 
     protected static function dbUpdate(string $table, array $data) {
 
