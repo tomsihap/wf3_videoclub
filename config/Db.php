@@ -28,6 +28,8 @@ class Db {
      * @param string    $table  Nom de la table dans lequel faire un INSERT
      * @param array     $data   Array contenant en clé les noms des champs de la table, en valeurs les values à enregistrer
      * 
+     * @return int      Id de l'enregistrement.
+     * 
      * Exemple :
      * $table = "Category";
      * $data = [
@@ -56,6 +58,8 @@ class Db {
      * @param string    $table  Nom de la table dans lequel faire un DELETE
      * @param array     $data   Array contenant en clé la PK de la table, en value la valeur à donner.
      * 
+     * @return void
+     * 
      * Exemple: 
      * $table = "Movie";
      * $data = [ 'id' => 3 ];
@@ -78,6 +82,8 @@ class Db {
      * Permet de récupérer (SELECT) des données en base de données.
      * @param string    $table  Nom de la table dans lequel faire un SELECT
      * @param array     $request   Array contenant une liste de trios ["champ", "opérateur", "valeur"].
+     * 
+     * @return array    Données demandées.
      * 
      * Exemple: 
      * $table = "Movie";
@@ -139,6 +145,8 @@ class Db {
      * Permet de mettre à jour (UPDATE) des données en base de données.
      * @param string    $table  Nom de la table dans lequel faire un UPDATE
      * @param array     $data   Array contenant en clé les noms des champs de la table, en valeurs les values à enregistrer.
+     * 
+     * @return int      Id de l'élément modifié.
      * 
      * OBLIGATOIRE : Passer un champ 'id' dans le tableau 'data'.
      * 
