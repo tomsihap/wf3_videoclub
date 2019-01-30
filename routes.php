@@ -3,6 +3,55 @@
 // Create Router instance
 $router = new Router();
 
+$router->get('/', 'PagesController@home' );
+$router->get('/about', 'PagesController@about');
+
+
+
+
+
+
+
+
+
+$router->get('/movies', function() {
+    echo "liste des films :";
+});
+
+$router->get('/categories', function() {
+    echo "liste des catégories :";
+});
+
+$router->get('/categories/ma-categorie', function() {
+    echo "Ma catégorie :";
+});
+
+$router->get('/actors', function() {
+    echo "liste des acteurs";
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $router->get('/a-propos', function() {
     echo "Bienvenue sur a propos";
     die;

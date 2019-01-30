@@ -1,11 +1,13 @@
 <?php
 
 /**
- * Constantes
+ * Config files
  */
 
+const DB_HOST = 'localhost';
+const DB_PORT = '3308';
+const DB_NAME = 'videoclub';
+const DB_USER = 'root';
+const DB_PWD  = '';
 
-/**
- * Aliases
- */
-class_alias('\Bramus\Router\Router', 'Router');
+const WEBSITE_TITLE = "Mon nouveau site";
