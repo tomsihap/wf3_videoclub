@@ -167,3 +167,11 @@ class Employee extends Db {
     }
 }
 ```
+
+
+# Gestion de dépendances avec Composer
+
+1. Installer Composer et choisir la bonne version de PHP-CLI (7.2.10 sur notre config par exemple)
+2. Créer un fichier .gitignore à la racine du projet en incluant la ligne : `vendor/`
+3. Importer une dépendance : `composer require bramus/router ~1.3`
+4. Utiliser l'autoloader : `require __DIR__ . '/vendor/autoload.php';`
