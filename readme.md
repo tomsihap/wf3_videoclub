@@ -15,12 +15,14 @@ position (=> 'accounting', 'seller', 'marketing')
 employement_date
 ```
 
-Renter
+```
+Customer
 --------
 id
 firstname
 lastname
 status (=> 'regular', 'vip', 'premium')
+```
 
 ## 2. Classes
 
