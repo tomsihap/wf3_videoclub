@@ -7,6 +7,7 @@ class PagesController {
     public function home() {
 
         $title = "Ma page d'accueil";
+
         include('./views/pages/home.php');
     }
 

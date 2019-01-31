@@ -20,7 +20,6 @@ foreach( glob('models/*.php') as $model ) { require_once $model; }
  */
 foreach( glob('controllers/*.php') as $controller ) { require_once $controller; }
 
-
 /**
  * Require routes
  */

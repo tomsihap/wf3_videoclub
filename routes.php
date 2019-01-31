@@ -6,6 +6,21 @@ $router = new Router();
 $router->get('/', 'PagesController@home' );
 $router->get('/about', 'PagesController@about');
 
+/**
+ * 
+ * GET /movies => Contrôleur "Movies", méthode : "index"
+ *      => Du html + un faux tableau/liste de film (la vue serait dans /views/films)
+
+ * GET /movies/add => Contrôleur "Movies", méthode : "add"
+ *      => Du html avec un formulaire pour créer un film
+
+
+ * POST /movies/save => Contrôleur "Movies", métode: "save"
+ *      => Du html avec un texte "Le film a bien été enregistré."
+
+ * /movies/(\d+)  => Contrôleur "Movies", méthode : "read", un argument "$id"
+ *      => Du html avec un faux titre de film
+ */
 
 
 
