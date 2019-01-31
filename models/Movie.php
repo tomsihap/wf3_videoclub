@@ -38,6 +38,14 @@ class Movie extends Db {
         return $dateFr;
     }
 
+    public function releaseDateUS() {
+
+        $date = new DateTime($this->releaseDate);
+        $dateFr = $date->format('Y-m-d H:i:s');
+
+        return $dateFr;
+    }
+
     public function plot() {
         return $this->plot;
     }
@@ -83,7 +91,7 @@ class Movie extends Db {
     public function save() {
         $data = [
             "title"         => $this->title(),
-            "release_date"   => $this->releaseDate(),
+            "release_date"  => $this->releaseDateUS(),
             "plot"          => $this->plot(),
             "id_category"   => $this->idCategory()
         ];
