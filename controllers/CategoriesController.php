@@ -13,12 +13,11 @@ class CategoriesController {
         /**
          * Rendu de la View
          */
-        include('./views/categories/index.php');
+        view('categories.index', compact('listCats', 'title'));
     }
 
     public function add() {
-
-        include('./views/categories/add.php');
+        view('categories.add');
     }
 
     public function save() {
@@ -26,7 +25,7 @@ class CategoriesController {
         $cat = new Category($_POST['title'], $_POST['description']);
         $cat->save();
 
-        include('./views/categories/save.php');
+        view('categories.save', 'cat');
     }
 
     public function read($id) {
@@ -35,7 +34,7 @@ class CategoriesController {
 
         var_dump($cat);
 
-        include('./views/categories/read.php');
+        view('categories.read', compact('cat'));
     }
 
 }

@@ -23,10 +23,7 @@ class Category extends Db {
     public function __construct($title, $description, $id = null) {
         $this->setTitle($title);
         $this->setDescription($description);
-
-        if (isset($id)) {
-            $this->id = $id;
-        }
+        $this->setId($id);
     }
 
     /**
@@ -47,6 +44,12 @@ class Category extends Db {
     /**
      * Setters
      */
+
+    public function setId($id) {
+        $this->id = $id;
+        return $this;
+    }
+
     public function setTitle($title) {
         $this->title = $title;
         return $this;
@@ -62,7 +65,6 @@ class Category extends Db {
      */
 
     public function save() {
-
 
         $data = [
             "title"         => $this->title(),
@@ -105,6 +107,8 @@ class Category extends Db {
         $element = Db::dbFind(self::TABLE_NAME, [
             ['id', '=', $id]
         ]);
+
+        $element = $element[0];
 
         $cat = new Category($element['title'], $element['description'], $element['id']);
 

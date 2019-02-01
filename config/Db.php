@@ -2,18 +2,12 @@
 
 class Db {
 
-    const DB_HOST = 'localhost';
-    const DB_PORT = '3308';
-    const DB_NAME = 'videoclub';
-    const DB_USER = 'root';
-    const DB_PWD  = '';
-
     public function __construct() { /** */ }
 
     private static function getDb() {
         try {
             // Essaie de faire ce script...
-            $bdd = new PDO('mysql:host='.self::DB_HOST.';dbname='.self::DB_NAME.';charset=utf8;port='.self::DB_PORT, self::DB_USER, self::DB_PWD);
+            $bdd = new PDO('mysql:host='.DB_HOST.';dbname='.DB_NAME.';charset=utf8;port='.DB_PORT, DB_USER, DB_PWD);
         }
         catch (Exception $e) {
             // Sinon, capture l'erreur et affiche la
@@ -135,9 +129,6 @@ class Db {
             $data[] = $donnees;
         }
 
-        if (count($data) == 1) {
-            $data = $data[0];
-        }
 
         return $data;
 

@@ -1,0 +1,1 @@
+<h1>La categorie a bien été créée.</h1>

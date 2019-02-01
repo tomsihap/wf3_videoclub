@@ -13,4 +13,4 @@
     </ul>
 
 <?php $content = ob_get_clean(); ?>
-<?php require 'views/template.php'; ?>
+<?php view('template', compact('content')); ?>

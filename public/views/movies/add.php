@@ -19,9 +19,9 @@
 
         </select>
 
-        <button type="submit">Envoyer</button>
+        <button type="submit">Créer un film</button>
     
     </form>
     
 <?php $content = ob_get_clean(); ?>
-<?php require 'views/template.php' ?>
+<?php view('template', compact('content')); ?>

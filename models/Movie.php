@@ -13,14 +13,17 @@ class Movie extends Db {
 
     const TABLE_NAME = "Movie";
 
-    public function __construct(string $title, DateTime $date, string $plot, Category $category) {
+    public function __construct(string $title, DateTime $date, string $plot, Category $category, int $id = null) {
 
         $this->setTitle($title);
         $this->setReleaseDate($date);
         $this->setPlot($plot);
         $this->setCategory($category);
+        $this->setId($id);
 
     }
+
+    /** Getters */
 
     public function id() {
         return $this->id;
@@ -64,6 +67,13 @@ class Movie extends Db {
         return $this->category;
     }
 
+    /** Setters */
+
+    public function setId($id) {
+        $this->id = $id;
+        return $this;
+    }
+
     public function setTitle($title) {
         $this->title = $title;
         return $this;
@@ -87,6 +97,8 @@ class Movie extends Db {
         return $this;
 
     }
+
+    /** Methods */
 
     public function save() {
         $data = [
@@ -116,6 +128,31 @@ class Movie extends Db {
         $this->dbDelete(self::TABLE_NAME, $data);
 
         return;
+    }
+
+    public static function findAll() {
+        return Db::dbFind(self::TABLE_NAME);
+    }
+
+    public static function find(array $request) {
+        return Db::dbFind(self::TABLE_NAME, $request);
+    }
+
+    public static function findOne(int $id) {
+
+        $element = Db::dbFind(self::TABLE_NAME, [
+            ['id', '=', $id]
+        ]);
+
+        $element = $element[0];
+
+        $date = new DateTime($element['release_date']);
+
+        $category = Category::findOne($element['id_category']);
+
+        $cat = new Movie($element['title'], $date, $element['plot'], $category);
+
+        return $cat;
     }
 
 
