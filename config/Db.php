@@ -153,7 +153,7 @@ class Db {
      */
     protected static function dbUpdate(string $table, array $data, string $idField = null) {
 
-        //$bdd = self::getDb();
+        $bdd = self::getDb();
 
         $req  = "UPDATE " . $table . " SET ";
 
