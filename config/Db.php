@@ -151,24 +151,29 @@ class Db {
      *      'description'   => 'Ma nouvelle catégorie.',
      * ];
      */
-    protected static function dbUpdate(string $table, array $data) {
+    protected static function dbUpdate(string $table, array $data, string $idField = null) {
 
-        $bdd = self::getDb();
+        //$bdd = self::getDb();
 
         $req  = "UPDATE " . $table . " SET ";
 
         $whereIdString = '';
 
+        /**
+         * Set du WHERE
+         */
+
+        $whereIdString = ($idField !== null) ? " WHERE `" . $idField . "` = :" . $idField : " WHERE id = :id";
+
+        /**
+         * Set des key = :value
+         */
         foreach($data as $key => $value) {
-            if ($key == 'id') {
-                $whereIdString = " WHERE id = :id";
-            }
-
-            else {
-
+            
+            if ($key !== 'id') {
                 $req .= "`" . $key . "` = :" . $key . ", ";
-
             }
+
         }
 
         $req = substr($req, 0, -2);
